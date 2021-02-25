@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{entry_title}}
+{% endblock %}
+
+{% block search %}
+    {% csrf_token %}
+    {{form}}
+{% endblock %}
+
+{% block body %}
+
+    {% if entry_body == none %}
+        <div class="text-center">
+            <h1>Page not Found!</h1>
+            <p>The requested page was not found</p>
+            <p>Please enter a correct page name or create a new one</p>
+        </div>
+    {% else %}
+        <div>
+            {{entry_body |safe}}
+        </div>
+        <a href="{% url 'wiki:edit' entry_title %}">Edit Page</a>
+    {% endif %}
+
+{% endblock %}

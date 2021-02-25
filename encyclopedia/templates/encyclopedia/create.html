@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create
+{% endblock %}
+
+{% block search %}
+    {% csrf_token %}
+    {{form}}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% if title in all_entries %}
+        <div class="text-center">
+            <h1>Encyclopedia entry already exists!</h1>
+            <p>Please enter a new entry</p>
+        </div>
+        {% endif %}
+        <form action="{% url 'wiki:create' %}" method="POST">
+            {% csrf_token %}
+            {{create_form}}
+            <br>
+            <input class="form-control container" type="submit" value="Create Page">
+        </form>
+    </div>
+
+{% endblock %}
